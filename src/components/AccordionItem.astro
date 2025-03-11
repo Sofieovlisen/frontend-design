@@ -28,51 +28,77 @@ const { id, question, answer, linkBlock } = props;
     color: hsl(190 30% 12%);
     border-bottom: 1px solid #dadada;
 
-    summary {
-      font-weight: 700;
-      color: #181818;
-      text-wrap: revert;
-      user-select: none;
-      cursor: pointer;
+    inline-size: 50ch;
 
-      &::marker,
-      &::-webkit-details-marker {
-        content: "";
-        display: none;
-      }
-
-      span {
-        border: none;
-        text-align: start;
-        padding: 0;
-        inline-size: 100%;
-        padding-block: 1rlh;
-        display: flex;
-        gap: 1rem;
-        justify-content: space-between;
-
-        svg {
-          inline-size: auto;
-          height: 1lh;
-          flex-shrink: 0;
-        }
-      }
+    @media (prefers-reduced-motion: no-preference) {
+      interpolate-size: allow-keywords;
     }
 
-    .answer {
-      color: #595566;
+    &::details-content {
+      opacity: 0;
+      block-size: 0;
+      overflow-y: clip;
+      transition:
+        content-visibility 1s allow-discrete,
+        opacity 1s,
+        block-size 1s;
+    }
 
-      > * + * {
-        margin-top: 1em;
-      }
+    &[open]::details-content {
+      opacity: 1;
+      block-size: auto;
+    }
+  }
 
-      :last-child {
-        padding-block-end: 1rlh;
-      }
+  details[open] {
+    --r: z 90deg;
+  }
 
-      .link-block {
-        display: block;
+  summary {
+    font-weight: 700;
+    color: #181818;
+    text-wrap: revert;
+    user-select: none;
+    cursor: pointer;
+
+    &::marker,
+    &::-webkit-details-marker {
+      content: "";
+      display: none;
+    }
+
+    span {
+      border: none;
+      text-align: start;
+      padding: 0;
+      inline-size: 100%;
+      padding-block: 1rlh;
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+
+      svg {
+        inline-size: auto;
+        height: 1lh;
+        flex-shrink: 0;
+        transform: var(--r);
       }
+    }
+  }
+
+  .answer {
+    color: #595566;
+
+    > * + * {
+      margin-top: 1em;
+    }
+
+    :last-child {
+      padding-block-end: 1rlh;
+    }
+
+    .link-block {
+      display: block;
     }
   }
 </style>
