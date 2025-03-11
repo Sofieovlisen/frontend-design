@@ -20,9 +20,9 @@ const { cardContent } = Astro.props;
     overflow-x: auto;
     gap: var(--card-gap);
     margin-inline: auto;
-    padding-left: calc((100vw - var(--content-width)) / 2);
-    padding-right: calc((100vw - var(--content-width)) / 2);
-    scroll-snap-type: x mandatory;
+    padding-inline: max(20px, 50% - var(--content-width) / 2);
+
+    scroll-snap-type: inline mandatory;
 
     li {
       background-color: var(--card-background);
@@ -30,7 +30,7 @@ const { cardContent } = Astro.props;
       gap: var(--card-gap);
       scroll-snap-align: center;
       scroll-snap-stop: always;
-      flex-basis: 65%;
+      flex-basis: min(90%, 400px);
       flex-shrink: 0;
       border-radius: var(--card-border-radius);
     }
